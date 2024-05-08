@@ -1,0 +1,26 @@
+# fly.toml app configuration file generated for rokr-growthbook-proxy on 2024-05-08T08:35:31-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'rokr-growthbook-proxy'
+primary_region = 'dfw'
+
+[build]
+  image = 'growthbook/proxy:latest'
+
+[http_service]
+  internal_port = 3300
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[env]
+GROWTHBOOK_API_HOST="https://cdn.growthbook.io"
